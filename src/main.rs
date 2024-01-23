@@ -157,8 +157,8 @@ async fn main() {
     );
     let mut snake = Snake::new();
 
-    //request_new_screen_size(SCREEN_WIDTH as f32, SCREEN_HEIGHT as f32);
-    //next_frame().await;
+    request_new_screen_size(SCREEN_WIDTH as f32, SCREEN_HEIGHT as f32);
+    next_frame().await;
 
     let mut move_timer = 0;
     let mut apple = Apple::new(
@@ -202,10 +202,10 @@ async fn main() {
         );
 
         if snake.is_dead() {
-            draw_text_center_x("You died!", 350.0, 35.0, color_u8!(255, 0, 0, 255));
+            draw_text_center_x("You died!", 315.0, 35.0, color_u8!(255, 0, 0, 255));
             draw_text_center_x(
                 "Press spacebar to restart",
-                385.0,
+                350.0,
                 35.0,
                 color_u8!(255, 255, 255, 255),
             );
