@@ -99,15 +99,15 @@ impl Snake {
 }
 
 impl Apple {
-    fn new(max_x: i32, max_y: i32, s: &Snake) -> Apple {
-        let x = gen_range(0, max_x);
-        let y = gen_range(0, max_y);
+    fn new(s: &Snake) -> Apple {
+        let x = gen_range(0, SCREEN_WIDTH / BLOCK_SIZE);
+        let y = gen_range(0, SCREEN_HEIGHT / BLOCK_SIZE);
 
         /* check if this collides with the snake's body */
         for b in s.blocks.iter() {
             if b.x == x && b.y == y {
                 /* Generate anew */
-                return Apple::new(max_x, max_y, s);
+                return Apple::new(s);
             }
         }
         Apple { x, y }
@@ -161,11 +161,7 @@ async fn main() {
     next_frame().await;
 
     let mut move_timer = 0;
-    let mut apple = Apple::new(
-        SCREEN_WIDTH / BLOCK_SIZE,
-        SCREEN_HEIGHT / BLOCK_SIZE,
-        &snake,
-    );
+    let mut apple = Apple::new(&snake);
 
     loop {
         /* Input */
@@ -182,11 +178,7 @@ async fn main() {
 
         /* Check apple. */
         if apple.x == snake.blocks[0].x && apple.y == snake.blocks[0].y {
-            apple = Apple::new(
-                SCREEN_WIDTH / BLOCK_SIZE,
-                SCREEN_HEIGHT / BLOCK_SIZE,
-                &snake,
-            );
+            apple = Apple::new(&snake);
             snake.grow();
         }
         apple.draw();
