@@ -6,3 +6,5 @@ steps:
 images:
   - "europe-west3-docker.pkg.dev/project-034002be-304c-4be3-bb1/main/test:latest"
     
+options:
+  logging: CLOUD_LOGGING_ONLY
